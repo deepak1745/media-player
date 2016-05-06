@@ -19,7 +19,7 @@ button{
 }
 </style>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
-<script src="js/jquery-1.12.3.min.js"></script>
+<script src="../js/jquery-1.12.3.min.js"></script>
 </head>
 <body>
   <div class="media">
@@ -37,7 +37,7 @@ button{
         Your browser does not support the audio element.
       </audio>
       <video class = "center video" id="video" width="700" height="400" draggable="true" controls>
-        <source id="videoFileChosen" src="Dwayne DJ Bravo - Champion (Official Song) - YouTube.mp4" type="video/mp4">
+        <source id="videoFileChosen" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <script>
@@ -59,7 +59,7 @@ button{
             video.load(); //call this to just preload the audio without playing
             video.play();
           }
-          else if(fileFormat[1]=="mp3"){
+          else {
             $('.video').css("display","none");
             $('.audio').css("display","block");
             var audio = document.getElementById('audio');
