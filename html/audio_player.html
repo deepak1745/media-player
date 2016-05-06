@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style media="screen">
+.center { margin:auto; display: block;}
+.media{ border-radius: 8px; border: 2px solid #73AD21!important; padding: 0px 0px 60px 0px;}
+audio{
+  width: 500px!important;
+  height: 40px!important;
+  padding-bottom: 5px;
+}
+button{
+  background-color:#337ab7!important;
+   color:#fff!important;
+   height: 25px;
+}
+</style>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
+<script src="js/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+  <div class="media">
+    <input type="file" id="myFile" size="70" />
+    <button type="button" onclick="myFunction()">Submit</button>
+
+    <h1 id="songName" style="text-align:center"> Play Song </h1>
+    <audio class="center" id="audio" controls="controls">
+
+      <source id="fileChosen" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <script>
+      function myFunction() {
+        var fileVal = document.getElementById("myFile").value;
+
+        var file = fileVal.split("\\");
+        var fileName = file[file.length-1];
+        var audio = document.getElementById('audio');
+
+       var source = document.getElementById('fileChosen');
+      //  source.src = fileName;
+      source.src = 'E:///himesh hits/' + fileName;
+       $('#songName').html('Playing '+ fileName +' Song');
+       audio.load(); //call this to just preload the audio without playing
+       audio.play();
+
+      }
+      </script>
+
+      <h2 align = "center"> Created by Deepak Kumar </h2>
+    </div>
+  </body>
+  </html>
