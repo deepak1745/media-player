@@ -24,12 +24,6 @@ button{
 <body>
   <div class="media">
     <input type="file" id="myFile" size="70" />
-    <!-- <script type="text/javascript">
-
-    if ($('#myFile').get(0).files.length === 0) {
-    console.log("No files selected.");
-}
-    </script> -->
     <button type="button" onclick="myFunction()">Submit</button>
     <h1 id="songName" style="text-align:center"> Play Song </h1>
     <audio class="center audio" id="audio" controls="controls">
@@ -46,17 +40,16 @@ button{
           var file = fileVal.split("\\");
           var fileName = file[file.length-1];
           var fileFormat = fileName.split('.');
-          console.log(fileFormat);
-
           if(fileFormat[1]=="mp4"){
             $('.audio').css("display","none");
             $('.video').css("display","block");
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
-            //  source.src = fileName;
+
+            <!-- specify file path here -->
             source.src = 'E:///himesh hits/' + fileName;
             $('#songName').html('Playing '+ fileName +' Song');
-            video.load(); //call this to just preload the audio without playing
+            video.load();
             video.play();
           }
           else {
@@ -64,10 +57,10 @@ button{
             $('.audio').css("display","block");
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
-            //  source.src = fileName;
+
             source.src = 'E:///himesh hits/' + fileName;
             $('#songName').html('Playing '+ fileName +' Song');
-            audio.load(); //call this to just preload the audio without playing
+            audio.load();
             audio.play();
           }
         }
