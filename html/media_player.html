@@ -48,7 +48,7 @@ button{
             $('.audio').css("display","block");
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
-            source.src = 'E:///himesh hits/' + fileName;   // change the src folder path according to your music directory.
+            source.src = 'E:///himesh hits/' + fileName;   // change the src folder path according to your own music directory name.
             $('#songName').html('Playing '+ fileName +' Song');
             audio.load();
             audio.play();
@@ -59,7 +59,7 @@ button{
               if(i<fileVals.length-1){
                 i++;
                 fileName = fileVals[i].name;
-                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory.
+                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
                 $('#songName').html('Playing '+ fileName +' Song');
                 audio.pause();
                 audio.load();
@@ -69,7 +69,7 @@ button{
                 if (document.getElementById('repeat').checked) {
                   i=0;
                   fileName = fileVals[i].name;
-                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory.
+                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
                   $('#songName').html('Playing '+ fileName +' Song');
                   audio.pause();
                   audio.load();
@@ -86,7 +86,7 @@ button{
             $('.video').css("display","block");
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
-            source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your music directory.
+            source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
             $('#songName').html('Playing '+ fileName +' Song');
             video.load();
             video.play();
@@ -97,7 +97,7 @@ button{
               if(i<fileVals.length-1){
                 i++;
                 fileName = fileVals[i].name;
-                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your music directory.
+                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
                 $('#songName').html('Playing '+ fileName +' Song');
                 video.pause();
                 video.load();
@@ -107,7 +107,7 @@ button{
                 if (document.getElementById('repeat').checked) {
                   i=0;
                   fileName = fileVals[i].name;
-                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your music directory.
+                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
                   $('#songName').html('Playing '+ fileName +' Song');
                   video.pause();
                   video.load();
