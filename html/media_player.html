@@ -13,32 +13,48 @@ audio{
   display: none;
 }
 button{
-  background-color:#337ab7!important;
+  background-color:#428bca!important;
   color:#fff!important;
   height: 25px;
 }
 #repeat{
   margin-top: .5%;
 }
+#prev{
+  margin-left: 45.7%;
+  margin-top: 1.7%;
+}
+#next{
+  margin-top: 1.7%;
+}
 </style>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
+
+<!-- cdn script link -->
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+
+<!-- downloaded script -->
 <script src="../js/jquery-1.12.3.min.js"></script>
 </head>
 <body>
   <div class="media">
     <input type="file" id="myFile" size="70" multiple="multiple"/>
     <button type="button" onclick="myFunction()">Submit</button>
-    <input type="checkbox" id="repeat" name="repeat" value="repeat "> Repeat
+    <input type="checkbox" id="repeat" name="repeat" value="repeat "> <b>Repeat</b>
     <h1 id="songName" style="text-align:center"> Play Song </h1>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
+      <button type="button"  id="prev" onclick="prevFunction()">Previous</button>
+      <button type="button" id="next" onclick="nextFunction()">Next</button>
       <video class = "center video" id="video" width="700" height="400" draggable="true" controls>
         <source id="videoFileChosen" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <script>
+
+        // Specify folder file path here.
+        var path = 'E:///himesh hits/';
         function myFunction() {
           var fileVals = document.getElementById("myFile").files;
           var fileName = fileVals[0].name;
@@ -48,18 +64,21 @@ button{
             $('.audio').css("display","block");
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
-            source.src = 'E:///himesh hits/' + fileName;   // change the src folder path according to your own music directory name.
+            source.src = path + fileName;
             $('#songName').html('Playing '+ fileName +' Song');
             audio.load();
             audio.play();
-            var i=0;
+            i=0;
+            j=0;
+            k=0;
 
             audio.addEventListener('ended', function(e){
-              console.log(i+" has ended.");
               if(i<fileVals.length-1){
                 i++;
+                j++;
+                k++;
                 fileName = fileVals[i].name;
-                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
+                source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 audio.pause();
                 audio.load();
@@ -68,8 +87,10 @@ button{
               else{
                 if (document.getElementById('repeat').checked) {
                   i=0;
+                  j=0;
+                  k=0;
                   fileName = fileVals[i].name;
-                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
+                  source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName +' Song');
                   audio.pause();
                   audio.load();
@@ -86,18 +107,21 @@ button{
             $('.video').css("display","block");
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
-            source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
+            source.src = path + fileName;
             $('#songName').html('Playing '+ fileName +' Song');
             video.load();
             video.play();
-            var i=0;
+            i=0;
+            j=0;
+            k=0;
 
             video.addEventListener('ended', function(e){
-              console.log(i+" has ended.");
               if(i<fileVals.length-1){
                 i++;
+                j++;
+                k++;
                 fileName = fileVals[i].name;
-                source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
+                source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 video.pause();
                 video.load();
@@ -106,8 +130,10 @@ button{
               else{
                 if (document.getElementById('repeat').checked) {
                   i=0;
+                  j=0;
+                  k=0;
                   fileName = fileVals[i].name;
-                  source.src = 'E:///himesh hits/' + fileName;  // change the src folder path according to your own music directory name.
+                  source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName +' Song');
                   video.pause();
                   video.load();
@@ -118,6 +144,142 @@ button{
                 }
               }
             });
+          }
+        }
+
+        function nextFunction(){
+          var fileVals = document.getElementById("myFile").files;
+          var fileName = fileVals[0].name;
+          var fileFormat = fileName.split('.');
+          if(fileFormat[1]=="mp3"){
+            var audio = document.getElementById('audio');
+            var source = document.getElementById('audioFileChosen');
+            if(j<fileVals.length-1){
+              i++;
+              j++;
+              k++;
+              fileName = fileVals[j].name;
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName +' Song');
+              audio.pause();
+              audio.load();
+              audio.play();
+            }
+            else{
+              if (document.getElementById('repeat').checked) {
+                i=0;
+                j=0;
+                k=0;
+                fileName = fileVals[j].name;
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName +' Song');
+                audio.pause();
+                audio.load();
+                audio.play();
+              }
+              else{
+                audio.pause();
+              }
+            }
+          }
+          else{
+            var video = document.getElementById('video');
+            var source = document.getElementById('videoFileChosen');
+            if(j<fileVals.length-1){
+              i++;
+              j++;
+              k++;
+              fileName = fileVals[j].name;
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName +' Song');
+              video.pause();
+              video.load();
+              video.play();
+            }
+            else{
+              if (document.getElementById('repeat').checked) {
+                i=0;
+                j=0;
+                k=0;
+                fileName = fileVals[j].name;
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName +' Song');
+                video.pause();
+                video.load();
+                video.play();
+              }
+              else{
+                video.pause();
+              }
+            }
+          }
+        }
+
+        function prevFunction(){
+          var fileVals = document.getElementById("myFile").files;
+          var fileName = fileVals[0].name;
+          var fileFormat = fileName.split('.');
+          if(fileFormat[1]=="mp3"){
+            var audio = document.getElementById('audio');
+            var source = document.getElementById('audioFileChosen');
+            if(k>0){
+              k--;
+              j--;
+              i--;
+              fileName = fileVals[k].name;
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName +' Song');
+              audio.pause();
+              audio.load();
+              audio.play();
+            }
+            else{
+              if (document.getElementById('repeat').checked) {
+                k=fileVals.length-1;
+                j=fileVals.length-1;
+                i=fileVals.length-1;
+                fileName = fileVals[k].name;
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName +' Song');
+                audio.pause();
+                audio.load();
+                audio.play();
+              }
+              else{
+                audio.pause();
+              }
+            }
+          }
+          else{
+            var video = document.getElementById('video');
+            var source = document.getElementById('videoFileChosen');
+            if(k>0){
+              i--;
+              k--;
+              j--;
+              fileName = fileVals[k].name;
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName +' Song');
+              video.pause();
+              video.load();
+              video.play();
+            }
+            else{
+              if (document.getElementById('repeat').checked) {
+                k=fileVals.length-1;
+                j=fileVals.length-1;
+                i=fileVals.length-1;
+                fileName = fileVals[k].name;
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName +' Song');
+                video.pause();
+                video.load();
+                video.play();
+              }
+              else{
+                video.pause();
+              }
+            }
           }
         }
         </script>
