@@ -69,14 +69,10 @@ button{
             audio.load();
             audio.play();
             i=0;
-            j=0;
-            k=0;
 
             audio.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
-                j++;
-                k++;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
@@ -87,8 +83,6 @@ button{
               else{
                 if (document.getElementById('repeat').checked) {
                   i=0;
-                  j=0;
-                  k=0;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName +' Song');
@@ -112,14 +106,10 @@ button{
             video.load();
             video.play();
             i=0;
-            j=0;
-            k=0;
 
             video.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
-                j++;
-                k++;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
@@ -130,8 +120,6 @@ button{
               else{
                 if (document.getElementById('repeat').checked) {
                   i=0;
-                  j=0;
-                  k=0;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName +' Song');
@@ -154,11 +142,9 @@ button{
           if(fileFormat[1]=="mp3"){
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
-            if(j<fileVals.length-1){
+            if(i<fileVals.length-1){
               i++;
-              j++;
-              k++;
-              fileName = fileVals[j].name;
+              fileName = fileVals[i].name;
               source.src = path + fileName;
               $('#songName').html('Playing '+ fileName +' Song');
               audio.pause();
@@ -168,9 +154,7 @@ button{
             else{
               if (document.getElementById('repeat').checked) {
                 i=0;
-                j=0;
-                k=0;
-                fileName = fileVals[j].name;
+                fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 audio.pause();
@@ -185,11 +169,9 @@ button{
           else{
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
-            if(j<fileVals.length-1){
+            if(i<fileVals.length-1){
               i++;
-              j++;
-              k++;
-              fileName = fileVals[j].name;
+              fileName = fileVals[i].name;
               source.src = path + fileName;
               $('#songName').html('Playing '+ fileName +' Song');
               video.pause();
@@ -199,9 +181,7 @@ button{
             else{
               if (document.getElementById('repeat').checked) {
                 i=0;
-                j=0;
-                k=0;
-                fileName = fileVals[j].name;
+                fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 video.pause();
@@ -222,11 +202,9 @@ button{
           if(fileFormat[1]=="mp3"){
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
-            if(k>0){
-              k--;
-              j--;
+            if(i>0){
               i--;
-              fileName = fileVals[k].name;
+              fileName = fileVals[i].name;
               source.src = path + fileName;
               $('#songName').html('Playing '+ fileName +' Song');
               audio.pause();
@@ -235,10 +213,8 @@ button{
             }
             else{
               if (document.getElementById('repeat').checked) {
-                k=fileVals.length-1;
-                j=fileVals.length-1;
                 i=fileVals.length-1;
-                fileName = fileVals[k].name;
+                fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 audio.pause();
@@ -253,11 +229,9 @@ button{
           else{
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
-            if(k>0){
+            if(i>0){
               i--;
-              k--;
-              j--;
-              fileName = fileVals[k].name;
+              fileName = fileVals[i].name;
               source.src = path + fileName;
               $('#songName').html('Playing '+ fileName +' Song');
               video.pause();
@@ -266,10 +240,8 @@ button{
             }
             else{
               if (document.getElementById('repeat').checked) {
-                k=fileVals.length-1;
-                j=fileVals.length-1;
                 i=fileVals.length-1;
-                fileName = fileVals[k].name;
+                fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName +' Song');
                 video.pause();
