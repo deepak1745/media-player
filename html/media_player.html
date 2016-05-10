@@ -58,8 +58,8 @@ button{
         function myFunction() {
           var fileVals = document.getElementById("myFile").files;
           var fileName = fileVals[0].name;
-          var fileFormat = fileName.split('.');
-          if(fileFormat[1]=="mp3"){
+          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
+          if(fileFormat=="mp3"){
             $('.video').css("display","none");
             $('.audio').css("display","block");
             var audio = document.getElementById('audio');
@@ -138,8 +138,8 @@ button{
         function nextFunction(){
           var fileVals = document.getElementById("myFile").files;
           var fileName = fileVals[0].name;
-          var fileFormat = fileName.split('.');
-          if(fileFormat[1]=="mp3"){
+          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
+          if(fileFormat=="mp3"){
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
             if(i<fileVals.length-1){
@@ -198,8 +198,8 @@ button{
         function prevFunction(){
           var fileVals = document.getElementById("myFile").files;
           var fileName = fileVals[0].name;
-          var fileFormat = fileName.split('.');
-          if(fileFormat[1]=="mp3"){
+          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
+          if(fileFormat=="mp3"){
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
             if(i>0){
