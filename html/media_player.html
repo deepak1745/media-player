@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style media="screen">
-.center { margin:auto; display: block;}
-.media{ border-radius: 8px; border: 2px solid #73AD21!important; padding: 0px 0px 60px 0px;}
-audio{
-  width: 500px!important;
-  height: 40px!important;
-  padding-bottom: 5px;
-}
-.video{
-  display: none;
-}
-button{
-  background-color:#428bca!important;
-  color:#fff!important;
-  height: 25px;
-}
-#repeat{
-  margin-top: .5%;
-}
-#prev{
-  margin-left: 45.7%;
-  margin-top: 1.7%;
-}
-#next{
-  margin-top: 1.7%;
-}
-</style>
 
-<!-- cdn script link -->
-<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+  <!--online css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<!-- downloaded script -->
-<script src="../js/jquery-1.12.3.min.js"></script>
+  <!--downloaded css-->
+  <!--link rel="stylesheet" href="../css/font-awesome.min.css" media="screen" title="no title" charset="utf-8"-->
+
+  <style media="screen">
+  .center { margin:auto; display: block;}
+  .media{ border-radius: 8px; border: 2px solid #73AD21!important; padding: 0px 0px 60px 0px;}
+  audio{
+    width: 500px!important;
+    height: 40px!important;
+    padding-bottom: 5px;
+  }
+  .video{
+    display: none;
+  }
+  button{
+    background-color:#428bca!important;
+    color:#fff!important;
+    height: 25px;
+  }
+  #repeat{
+    margin-top: .5%;
+  }
+  #prev{
+    margin-left: 45.5%;
+    margin-top: 1.7%;
+  }
+  #next{
+    margin-top: 1.7%;
+  }
+  .fa-music{
+    margin-top: .3%;
+  }
+  </style>
+
+  <!--online script-->
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+
+  <!--downloaded script-->
+  <script src="../js/jquery-1.12.3.min.js"></script>
 </head>
 <body>
   <div class="media">
     <input type="file" id="myFile" size="70" multiple="multiple"/>
     <button type="button" onclick="myFunction()">Submit</button>
     <input type="checkbox" id="repeat" name="repeat" value="repeat "> <b>Repeat</b>
-    <h2 id="songName" style="text-align:center"> Play Song </h2>
+    <h2 id="songName" style="text-align:center"> Play Song <i class="fa fa-music" aria-hidden="true"></i> </h2>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
-      <button type="button"  id="prev" onclick="prevFunction()">Previous</button>
-      <button type="button" id="next" onclick="nextFunction()">Next</button>
+      <button type="button"  id="prev" onclick="prevFunction()">Prev <i class="fa fa-backward" aria-hidden="true"></i> </button>
+      <button type="button" id="next" onclick="nextFunction()">Next  <i class="fa fa-forward" aria-hidden="true"></i> </button>
       <video class = "center video" id="video" width="700" height="400" draggable="true" controls>
         <source id="videoFileChosen" type="video/mp4">
+          <!--<track src="C://Users/krrish/Downloads/Compressed/The.Originals.S03E16.HDTV.x264-LOL.srt" kind="subtitles" srclang="en" label="English" default="default">-->
           Your browser does not support the video tag.
         </video>
         <script>
@@ -65,7 +76,7 @@ button{
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
             source.src = path + fileName;
-            $('#songName').html('Playing '+ fileName +' Song');
+            $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
             audio.load();
             audio.play();
             i=0;
@@ -75,7 +86,7 @@ button{
                 i++;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 audio.pause();
                 audio.load();
                 audio.play();
@@ -85,7 +96,7 @@ button{
                   i=0;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
-                  $('#songName').html('Playing '+ fileName +' Song');
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   audio.pause();
                   audio.load();
                   audio.play();
@@ -102,7 +113,7 @@ button{
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
             source.src = path + fileName;
-            $('#songName').html('Playing '+ fileName +' Song');
+            $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
             video.load();
             video.play();
             i=0;
@@ -112,7 +123,7 @@ button{
                 i++;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 video.pause();
                 video.load();
                 video.play();
@@ -122,7 +133,7 @@ button{
                   i=0;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
-                  $('#songName').html('Playing '+ fileName +' Song');
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   video.pause();
                   video.load();
                   video.play();
@@ -146,7 +157,7 @@ button{
               i++;
               fileName = fileVals[i].name;
               source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName +' Song');
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
               audio.pause();
               audio.load();
               audio.play();
@@ -156,7 +167,7 @@ button{
                 i=0;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 audio.pause();
                 audio.load();
                 audio.play();
@@ -173,7 +184,7 @@ button{
               i++;
               fileName = fileVals[i].name;
               source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName +' Song');
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
               video.pause();
               video.load();
               video.play();
@@ -183,7 +194,7 @@ button{
                 i=0;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 video.pause();
                 video.load();
                 video.play();
@@ -206,7 +217,7 @@ button{
               i--;
               fileName = fileVals[i].name;
               source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName +' Song');
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
               audio.pause();
               audio.load();
               audio.play();
@@ -216,7 +227,7 @@ button{
                 i=fileVals.length-1;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 audio.pause();
                 audio.load();
                 audio.play();
@@ -233,7 +244,7 @@ button{
               i--;
               fileName = fileVals[i].name;
               source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName +' Song');
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
               video.pause();
               video.load();
               video.play();
@@ -243,7 +254,7 @@ button{
                 i=fileVals.length-1;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName +' Song');
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                 video.pause();
                 video.load();
                 video.play();
