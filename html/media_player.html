@@ -10,7 +10,7 @@
 
   <style media="screen">
   .center { margin:auto; display: block;}
-  .media{ border-radius: 8px; border: 2px solid #73AD21!important; padding: 0px 0px 60px 0px;}
+  .player{ border-radius: 8px; border: 2px solid #181818 !important; padding: 0px 0px 60px 0px;}
   audio{
     width: 500px!important;
     height: 40px!important;
@@ -20,22 +20,60 @@
     display: none;
   }
   button{
-    background-color:#428bca!important;
     color:#fff!important;
-    height: 25px;
+    height: 30px;
+    background-color: #3e8e41;
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
   }
   #repeat{
     margin-top: .5%;
   }
-  #prev{
-    margin-left: 45.5%;
+  #prev, #next, #repeat, #shuffle{
     margin-top: 1.7%;
   }
-  #next{
-    margin-top: 1.7%;
+  #repeat{
+    margin-left: 1%;
+  }
+  #prev{
+    margin-right: .5%;
   }
   .fa-music{
     margin-top: .3%;
+    font-size: inherit!important;
+  }
+  .fa-refresh{
+    margin-right: .5%;
+  }
+  .fa{
+    font-size: 13px;
+    color:#fff!important;
+  }
+  #myFile{
+    margin-left: 1%;
+    margin-right: .7%;
+    color:#fff!important;
+    height: 25px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 6px 10px 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+  }
+  .player{
+    background-image: url("../images/media4.jpg");
+    max-height: 590px;
+  }
+  #songName, span, #creator{
+     color:#fff!important;
   }
   </style>
 
@@ -46,17 +84,20 @@
   <script src="../js/jquery-1.12.3.min.js"></script>
 </head>
 <body>
-  <div class="media">
+  <div class="player">
     <input type="file" id="myFile" size="70" multiple="multiple"/>
     <button type="button" onclick="myFunction()">Submit</button>
-    <input type="checkbox" id="repeat" name="repeat" value="repeat "> <b>Repeat</b>
+    <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span> Repeat </span> <i class="fa fa-refresh" aria-hidden="true"></i>
+    <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
     <h2 id="songName" style="text-align:center"> Play Song <i class="fa fa-music" aria-hidden="true"></i> </h2>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
-      <button type="button"  id="prev" onclick="prevFunction()">Prev <i class="fa fa-backward" aria-hidden="true"></i> </button>
-      <button type="button" id="next" onclick="nextFunction()">Next  <i class="fa fa-forward" aria-hidden="true"></i> </button>
+      <div style="text-align:center;">
+        <button type="button"  id="prev" onclick="prevFunction()">Prev <i class="fa fa-backward" aria-hidden="true"></i> </button>
+        <button type="button" id="next" onclick="nextFunction()">Next  <i class="fa fa-forward" aria-hidden="true"></i> </button>
+      </div>
       <video class = "center video" id="video" width="700" height="400" draggable="true" controls>
         <source id="videoFileChosen" type="video/mp4">
           <!--<track src="C://Users/krrish/Downloads/Compressed/The.Originals.S03E16.HDTV.x264-LOL.srt" kind="subtitles" srclang="en" label="English" default="default">-->
@@ -68,6 +109,7 @@
         var path = 'E:///himesh hits/';
         function myFunction() {
           var fileVals = document.getElementById("myFile").files;
+          console.log(fileVals);
           var fileName = fileVals[0].name;
           var fileFormat = fileName.substring(fileName.length-3,fileName.length);
           if(fileFormat=="mp3"){
@@ -151,6 +193,8 @@
           var fileName = fileVals[0].name;
           var fileFormat = fileName.substring(fileName.length-3,fileName.length);
           if(fileFormat=="mp3"){
+            $('.video').css("display","none");
+            $('.audio').css("display","block");
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
             if(i<fileVals.length-1){
@@ -178,6 +222,8 @@
             }
           }
           else{
+            $('.audio').css("display","none");
+            $('.video').css("display","block");
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
             if(i<fileVals.length-1){
@@ -211,6 +257,8 @@
           var fileName = fileVals[0].name;
           var fileFormat = fileName.substring(fileName.length-3,fileName.length);
           if(fileFormat=="mp3"){
+            $('.video').css("display","none");
+            $('.audio').css("display","block");
             var audio = document.getElementById('audio');
             var source = document.getElementById('audioFileChosen');
             if(i>0){
@@ -238,6 +286,8 @@
             }
           }
           else{
+            $('.audio').css("display","none");
+            $('.video').css("display","block");
             var video = document.getElementById('video');
             var source = document.getElementById('videoFileChosen');
             if(i>0){
@@ -266,7 +316,7 @@
           }
         }
         </script>
-        <h2 align = "center"> Created by Deepak Kumar </h2>
+        <h2 id= "creator" align = "center"> Created by Deepak Kumar </h2>
       </div>
     </body>
     </html>
