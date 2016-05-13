@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <title>Media Player</title>
   <!--online css-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
   <!--downloaded css-->
   <!--link rel="stylesheet" href="../css/font-awesome.min.css" media="screen" title="no title" charset="utf-8"-->
+  <!--link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" title="no title" charset="utf-8"-->
 
   <style media="screen">
   .center { margin:auto; display: block;}
-  .player{ border-radius: 0px; border: 2px solid #181818 !important; padding: 0px 0px 60px 0px;}
+  .player{ border-radius: 0px; padding: 0px 0px 60px 0px;}
   audio{
     width: 500px!important;
     height: 40px!important;
     padding-bottom: 5px;
+    margin-top: 3%!important;
   }
   .video{
     display: none;
     margin-top: 1.8%;
   }
-  button{
+  .buttons{
     color:#fff!important;
     height: 30px;
     background-color: #3e8e41;
@@ -35,14 +38,17 @@
   #repeat{
     margin-top: .5%;
   }
-  #prev, #next, #repeat, #shuffle{
+  #prev, #next{
     margin-top: 1.7%;
   }
   #repeat{
     margin-left: 1%;
+    margin-top: 1.6%;
   }
-
-  #prev{
+  #shuffle{
+    margin-top: 1.6%;
+  }
+  #prev, #curr{
     margin-right: .5%;
   }
   .fa-music{
@@ -50,7 +56,7 @@
     font-size: inherit!important;
   }
   .fa-refresh{
-    margin-right: .5%;
+    margin-right: 1%;
   }
   .fa{
     font-size: 13px;
@@ -60,81 +66,203 @@
     margin-left: 1%;
     margin-right: .7%;
     color:#fff!important;
-    height: 25px;
-    /*background-color: #008CBA;*/
+    height: 36px!important;
     background-color: #337ab7;
-    /*#008CBA*/
-    /*background-color: #38474e;*/
     border: none;
-    color: white;
     padding: 6px 10px 5px 10px;
-    text-align: center;
+    text-align: center!important;
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
   }
   .player{
-    background-image: url("../images/media4.jpg");
     max-height: 603px;
   }
   #songName, span, #creator{
-     color:#fff!important;
+    color:#fff!important;
   }
-  #creator{
-    margin-top: 3%;
+  #songName{
+    margin-top: 4%;
+    font-size: 25px;
+    margin-left: -1.8%;
   }
   body{
     margin: 0;
+    background-image: url("../images/media4.jpg");
+  }
+  #youplay{
+    margin-left: 20%;
+    margin-right: .5%;
+    background-color: #d9534f;
+  }
+  .mode{
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .btn-default{
+    background-color: #38474e;
+    color: #fff;
   }
   </style>
 
   <!--online script-->
   <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+  <!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
 
   <!--downloaded script-->
   <script src="../js/jquery-1.12.3.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
   <div class="player">
-    <input type="file" id="myFile" size="70" multiple="multiple"/>
-    <button type="button" onclick="myFunction()">Submit</button>
-    <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span> Repeat </span> <i class="fa fa-refresh" aria-hidden="true"></i>
-    <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
+    <input type="file" id="myFile" size="70" autofocus multiple="multiple"/>
+    <button type="button" class="buttons" onclick="myFunction()">Submit</button>
+    <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span class="mode"> Repeat All</span> <i class="fa fa-refresh" aria-hidden="true"></i>
+    <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
+    <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay</button></a>
+    <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal"> FolderPath </a>
     <h2 id="songName" style="text-align:center"> Play Song <i class="fa fa-music" aria-hidden="true"></i> </h2>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
       <div style="text-align:center;">
-        <button type="button"  id="prev" onclick="prevFunction()">Prev <i class="fa fa-backward" aria-hidden="true"></i> </button>
-        <button type="button" id="next" onclick="nextFunction()">Next  <i class="fa fa-forward" aria-hidden="true"></i> </button>
+        <button type="button"  class="buttons" id="prev" onclick="prevFunction()">Prev <i class="fa fa-backward" aria-hidden="true"></i> </button>
+        <button type="button"  class="buttons" id="curr" onclick="currentFunction()">Repeat Current <i class="fa fa-repeat" aria-hidden="true"></i></button>
+        <button type="button" class="buttons" id="next" onclick="nextFunction()">Next  <i class="fa fa-forward" aria-hidden="true"></i> </button>
       </div>
-      <video class = "center video" id="video" width="700" height="380" draggable="true" controls>
+      <video class = "center video" id="video" width="680" height="380" draggable="true" controls>
         <source id="videoFileChosen" type="video/mp4">
           <!--<track src="C://Users/krrish/Downloads/Compressed/The.Originals.S03E16.HDTV.x264-LOL.srt" kind="subtitles" srclang="en" label="English" default="default">-->
           Your browser does not support the video tag.
         </video>
-        <script>
 
-        // Specify folder file path here.
-        var path = 'E:///himesh hits/';
-        function myFunction() {
-          var fileVals = document.getElementById("myFile").files;
-          console.log(fileVals);
-          var fileName = fileVals[0].name;
-          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
-          if(fileFormat=="mp3"){
-            $('.video').css("display","none");
-            $('.audio').css("display","block");
-            var audio = document.getElementById('audio');
-            var source = document.getElementById('audioFileChosen');
-            source.src = path + fileName;
-            $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-            audio.load();
-            audio.play();
-            i=0;
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h3 style="text-align:center;" class="modal-title">Enter complete folder path of music directory. </h3>
+                <h4 style="text-align:center;" class="modal-title">eg. C:/Users/krrish/Downloads/favourites </h4>
+              </div><!-- end modal-header -->
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label" for="folderPath">Path</label>
+                    <div class="col-lg-10">
+                      <input class="form-control" id="folderPath" placeholder="Enter path here" type="text">
+                    </div><!--end of form group-->
+                  </div><!--end of form-horizontal-->
+                </div><!-- end modal-body -->
 
-            audio.addEventListener('ended', function(e){
+                <div class="modal-footer">
+                  <button class="btn btn-default" data-dismiss="modal" type="button">Close</button> <button class="btn btn-primary" type="button" data-dismiss="modal" onclick="myFolderPath()">Save</button>
+                  <h4></h4>
+                </div><!-- end modal-footer -->
+              </div><!-- end modal-content -->
+            </div><!-- end modal-dialog -->
+          </div><!-- end myModal -->
+
+          <script>
+          var path;
+          var audio = document.getElementById('audio');
+          var video = document.getElementById('video');
+
+          function myFolderPath() {
+            audio.pause();
+            video.pause();
+            path = $('#folderPath').val() + '/';
+            $('#myFile').val("");
+          }
+
+          // Specify folder file path here if not entered in folder path modal window.
+          path = 'E:///himesh hits/';
+
+          function myFunction() {
+            fileVals = document.getElementById("myFile").files;
+            fileName = fileVals[0].name;
+            fileFormat = fileName.substring(fileName.length-3,fileName.length);
+            audio.pause();
+            video.pause();
+            if(fileFormat=="mp3"){
+              $('.video').css("display","none");
+              $('.audio').css("display","block");
+              var source = document.getElementById('audioFileChosen');
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+              audio.load();
+              audio.play();
+              i=0;
+
+              audio.addEventListener('ended', function(e){
+                if(i<fileVals.length-1){
+                  i++;
+                  fileName = fileVals[i].name;
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  audio.pause();
+                  audio.load();
+                  audio.play();
+                }
+                else{
+                  if (document.getElementById('repeat').checked) {
+                    i=0;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    audio.pause();
+                    audio.load();
+                    audio.play();
+                  }
+                  else{
+                    audio.pause();
+                  }
+                }
+              });
+            }
+            else{
+              $('.audio').css("display","none");
+              $('.video').css("display","block");
+              var source = document.getElementById('videoFileChosen');
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+              video.load();
+              video.play();
+              i=0;
+
+              video.addEventListener('ended', function(e){
+                if(i<fileVals.length-1){
+                  i++;
+                  fileName = fileVals[i].name;
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  video.pause();
+                  video.load();
+                  video.play();
+                }
+                else{
+                  if (document.getElementById('repeat').checked) {
+                    i=0;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    video.pause();
+                    video.load();
+                    video.play();
+                  }
+                  else{
+                    video.pause();
+                  }
+                }
+              });
+            }
+          }
+
+          function nextFunction(){
+            if(fileFormat=="mp3"){
+              $('.video').css("display","none");
+              $('.audio').css("display","block");
+              var source = document.getElementById('audioFileChosen');
               if(i<fileVals.length-1){
                 i++;
                 fileName = fileVals[i].name;
@@ -158,20 +286,11 @@
                   audio.pause();
                 }
               }
-            });
-          }
-          else{
-            $('.audio').css("display","none");
-            $('.video').css("display","block");
-            var video = document.getElementById('video');
-            var source = document.getElementById('videoFileChosen');
-            source.src = path + fileName;
-            $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-            video.load();
-            video.play();
-            i=0;
-
-            video.addEventListener('ended', function(e){
+            }
+            else{
+              $('.audio').css("display","none");
+              $('.video').css("display","block");
+              var source = document.getElementById('videoFileChosen');
               if(i<fileVals.length-1){
                 i++;
                 fileName = fileVals[i].name;
@@ -195,31 +314,16 @@
                   video.pause();
                 }
               }
-            });
-          }
-        }
-
-        function nextFunction(){
-          var fileVals = document.getElementById("myFile").files;
-          var fileName = fileVals[0].name;
-          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
-          if(fileFormat=="mp3"){
-            $('.video').css("display","none");
-            $('.audio').css("display","block");
-            var audio = document.getElementById('audio');
-            var source = document.getElementById('audioFileChosen');
-            if(i<fileVals.length-1){
-              i++;
-              fileName = fileVals[i].name;
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              audio.pause();
-              audio.load();
-              audio.play();
             }
-            else{
-              if (document.getElementById('repeat').checked) {
-                i=0;
+          }
+
+          function prevFunction(){
+            if(fileFormat=="mp3"){
+              $('.video').css("display","none");
+              $('.audio').css("display","block");
+              var source = document.getElementById('audioFileChosen');
+              if(i>0){
+                i--;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -228,27 +332,26 @@
                 audio.play();
               }
               else{
-                audio.pause();
+                if (document.getElementById('repeat').checked) {
+                  i=fileVals.length-1;
+                  fileName = fileVals[i].name;
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  audio.pause();
+                  audio.load();
+                  audio.play();
+                }
+                else{
+                  audio.pause();
+                }
               }
             }
-          }
-          else{
-            $('.audio').css("display","none");
-            $('.video').css("display","block");
-            var video = document.getElementById('video');
-            var source = document.getElementById('videoFileChosen');
-            if(i<fileVals.length-1){
-              i++;
-              fileName = fileVals[i].name;
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              video.pause();
-              video.load();
-              video.play();
-            }
             else{
-              if (document.getElementById('repeat').checked) {
-                i=0;
+              $('.audio').css("display","none");
+              $('.video').css("display","block");
+              var source = document.getElementById('videoFileChosen');
+              if(i>0){
+                i--;
                 fileName = fileVals[i].name;
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -257,77 +360,50 @@
                 video.play();
               }
               else{
-                video.pause();
+                if (document.getElementById('repeat').checked) {
+                  i=fileVals.length-1;
+                  fileName = fileVals[i].name;
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  video.pause();
+                  video.load();
+                  video.play();
+                }
+                else{
+                  video.pause();
+                }
               }
             }
           }
-        }
 
-        function prevFunction(){
-          var fileVals = document.getElementById("myFile").files;
-          var fileName = fileVals[0].name;
-          var fileFormat = fileName.substring(fileName.length-3,fileName.length);
-          if(fileFormat=="mp3"){
-            $('.video').css("display","none");
-            $('.audio').css("display","block");
-            var audio = document.getElementById('audio');
-            var source = document.getElementById('audioFileChosen');
-            if(i>0){
-              i--;
-              fileName = fileVals[i].name;
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              audio.pause();
-              audio.load();
-              audio.play();
-            }
-            else{
-              if (document.getElementById('repeat').checked) {
-                i=fileVals.length-1;
-                fileName = fileVals[i].name;
-                source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                audio.pause();
-                audio.load();
-                audio.play();
+          function currentFunction(){
+            if(fileFormat == 'mp3'){
+              if(audio.loop == false){
+                audio.loop = true;
+                $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
               }
               else{
-                audio.pause();
+                audio.loop = false;
+                $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
+              }
+            }
+            else{
+              if(video.loop == false){
+                video.loop = true;
+                $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
+              }
+              else{
+                video.loop = false;
+                $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
               }
             }
           }
-          else{
-            $('.audio').css("display","none");
-            $('.video').css("display","block");
-            var video = document.getElementById('video');
-            var source = document.getElementById('videoFileChosen');
-            if(i>0){
-              i--;
-              fileName = fileVals[i].name;
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              video.pause();
-              video.load();
-              video.play();
-            }
-            else{
-              if (document.getElementById('repeat').checked) {
-                i=fileVals.length-1;
-                fileName = fileVals[i].name;
-                source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                video.pause();
-                video.load();
-                video.play();
-              }
-              else{
-                video.pause();
-              }
-            }
-          }
-        }
-        </script>
-        <h2 id= "creator" align = "center"> Created by Deepak Kumar </h2>
-      </div>
-    </body>
-    </html>
+
+          // video.addEventListener('click', function(e){
+          //
+          // }
+
+          </script>
+        </div>
+      </body>
+      </html>
