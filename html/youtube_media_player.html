@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>YouTube Media Player</title>
+  <style media="screen">
+  #mainPlayer{
+    width: 690px;
+    margin: auto;
+    display: block;
+    margin-top: 4%;
+  }
+  button{
+    color:#fff!important;
+    height: 30px;
+    background-color: #3e8e41;
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  body{
+    background-image: url("../images/media4.jpg");
+  }
+  #playVideo{
+    border: 1px solid #181818
+  }
+  #home{
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+  }
+  #home-button{
+    background-color: #337ab7;
+  }
+  #input{
+    margin-left: 3%;
+    margin-right: 1%;
+    height: 25px;
+    width: 31%;
+    font-size: 18px;
+    padding: 3px 10px;
+    font-weight: 500;
+  }
+  </style>
+
+  <!--online script-->
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+
+  <!--downloaded script-->
+  <script src="../js/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+  <div id="home"><a href="media_player.html"><button type="button" id="home-button">Home</button></a>
+    <input id= "input" type="text" name="source" autofocus required placeholder="Paste youtube embedded url here" spellcheck="false"/>
+    <button type="button" onclick="myFunction()">Submit</button>
+  </div>
+  <div id ="mainPlayer">
+    <iframe id="playVideo" src="http://www.youtube.com/embed/lBuLUidR9r0" width="670" height="450"  frameborder="2" allowfullscreen autohide="1" autoplay="1" controls loop="1"></iframe>
+  </div>
+  <script>
+  $('input').bind("enterKey",function(e){
+    var url = $('#input').val();
+    var frame = document.getElementById('playVideo');
+    frame.src = url;
+  });
+  $('input').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      $(this).trigger("enterKey");
+    }
+  });
+  function myFunction() {
+    var url = $('#input').val();
+    var frame = document.getElementById('playVideo');
+    frame.src = url;
+  }
+  </script>
+</body>
+</html>
