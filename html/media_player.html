@@ -119,8 +119,8 @@
     <button type="button" class="buttons" onclick="myFunction()">Submit</button>
     <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span class="mode"> Repeat All</span> <i class="fa fa-refresh" aria-hidden="true"></i>
     <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
-    <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay</button></a>
-    <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal"> FolderPath </a>
+    <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay <i class="fa fa-youtube-play" aria-hidden="true"></i></button></a>
+    <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal"> FolderPath <i class="fa fa-folder-open" aria-hidden="true"></i></a>
     <h2 id="songName" style="text-align:center"> Play Song <i class="fa fa-music" aria-hidden="true"></i> </h2>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
@@ -179,11 +179,11 @@
           path = 'E:///himesh hits/';
 
           function myFunction() {
+            audio.pause();
+            video.pause();
             fileVals = document.getElementById("myFile").files;
             fileName = fileVals[0].name;
             fileFormat = fileName.substring(fileName.length-3,fileName.length);
-            audio.pause();
-            video.pause();
             if(fileFormat=="mp3"){
               $('.video').css("display","none");
               $('.audio').css("display","block");
@@ -197,6 +197,7 @@
               audio.addEventListener('ended', function(e){
                 if(i<fileVals.length-1){
                   i++;
+                  console.log('playing '+ i);
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -399,11 +400,46 @@
             }
           }
 
-          // video.addEventListener('click', function(e){
-          //
-          // }
+          document.getElementById("video").onclick = function(ev){
+            var vid = document.getElementById("video");
+            var heightOfControls = 45;
+            var areaAboveControls = vid.height - heightOfControls;
+            if(ev.layerY < areaAboveControls)
+            {
+              if(vid.paused){
+                vid.play();
+              }
+              else{
+                vid.pause();
+              }
+            }
+            else
+            {
+              if( Math.abs(window.innerHeight - screen.height)<150) {
+                // browser is fullscreen
+                if(vid.paused){
+                  vid.play();
+                }
+                else{
+                  vid.pause();
+                }
+              }
+            }
+          };
 
-          </script>
-        </div>
-      </body>
-      </html>
+          $(window).keypress(function(e) {
+            var vid = document.getElementById("video");
+            if (e.which == 32) {
+              if (vid.paused == true){}
+              vid.play();
+            }
+            else{
+              vid.pause();
+            }
+          }
+        });
+
+        </script>
+      </div>
+    </body>
+    </html>
