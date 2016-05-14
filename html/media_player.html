@@ -59,7 +59,7 @@
     margin-right: 1%;
   }
   .fa{
-    font-size: 13px;
+    font-size: 15px;
     color:#fff!important;
   }
   #myFile{
@@ -78,7 +78,7 @@
   .player{
     max-height: 603px;
   }
-  #songName, span, #creator{
+  #songName, #creator{
     color:#fff!important;
   }
   #songName{
@@ -98,10 +98,24 @@
   .mode{
     font-size: 17px;
     font-weight: 500;
+    color:#fff!important;
   }
   .btn-default{
     background-color: #38474e;
     color: #fff;
+  }
+  #errorMessage{
+    margin-top: 4%;
+    text-align: center;
+    color:#cc0000!important;
+    letter-spacing: 1px!important;
+  }
+  #submit:disabled{
+    opacity: .55;
+  }
+  #error{
+    border: 2px solid rgb(107, 58, 59)!important;
+    padding: 5px 7px;
   }
   </style>
 
@@ -116,7 +130,7 @@
 <body>
   <div class="player">
     <input type="file" id="myFile" size="70" autofocus multiple="multiple"/>
-    <button type="button" class="buttons" onclick="myFunction()">Submit</button>
+    <button type="button" class="buttons" id= "submit" disabled="true" onclick="myFunction()">Submit</button>
     <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span class="mode"> Repeat All</span> <i class="fa fa-refresh" aria-hidden="true"></i>
     <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
     <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay <i class="fa fa-youtube-play" aria-hidden="true"></i></button></a>
@@ -150,7 +164,7 @@
                   <div class="form-group">
                     <label class="col-lg-2 control-label" for="folderPath">Path</label>
                     <div class="col-lg-10">
-                      <input class="form-control" id="folderPath" placeholder="Enter path here" type="text">
+                      <input class="form-control" id="folderPath" placeholder="Enter path here" type="text" spellcheck="false">
                     </div><!--end of form group-->
                   </div><!--end of form-horizontal-->
                 </div><!-- end modal-body -->
@@ -169,16 +183,18 @@
           var video = document.getElementById('video');
 
           function myFolderPath() {
+            $('#errorMessage').css("display","none");
             audio.pause();
             video.pause();
-            path = $('#folderPath').val() + '/';
             $('#myFile').val("");
+            document.getElementById('submit').disabled = false;
           }
 
           // Specify folder file path here if not entered in folder path modal window.
-          path = 'E:///himesh hits/';
+          //path = 'E:///himesh hits/';
 
           function myFunction() {
+            path = $('#folderPath').val() + '/';
             audio.pause();
             video.pause();
             fileVals = document.getElementById("myFile").files;
@@ -193,33 +209,6 @@
               audio.load();
               audio.play();
               i=0;
-
-              audio.addEventListener('ended', function(e){
-                if(i<fileVals.length-1){
-                  i++;
-                  console.log('playing '+ i);
-                  fileName = fileVals[i].name;
-                  source.src = path + fileName;
-                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                  audio.pause();
-                  audio.load();
-                  audio.play();
-                }
-                else{
-                  if (document.getElementById('repeat').checked) {
-                    i=0;
-                    fileName = fileVals[i].name;
-                    source.src = path + fileName;
-                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                    audio.pause();
-                    audio.load();
-                    audio.play();
-                  }
-                  else{
-                    audio.pause();
-                  }
-                }
-              });
             }
             else{
               $('.audio').css("display","none");
@@ -230,32 +219,6 @@
               video.load();
               video.play();
               i=0;
-
-              video.addEventListener('ended', function(e){
-                if(i<fileVals.length-1){
-                  i++;
-                  fileName = fileVals[i].name;
-                  source.src = path + fileName;
-                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                  video.pause();
-                  video.load();
-                  video.play();
-                }
-                else{
-                  if (document.getElementById('repeat').checked) {
-                    i=0;
-                    fileName = fileVals[i].name;
-                    source.src = path + fileName;
-                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                    video.pause();
-                    video.load();
-                    video.play();
-                  }
-                  else{
-                    video.pause();
-                  }
-                }
-              });
             }
           }
 
@@ -430,16 +393,73 @@
           $(window).keypress(function(e) {
             var vid = document.getElementById("video");
             if (e.which == 32) {
-              if (vid.paused == true){}
-              vid.play();
+              if (vid.paused == true){
+                vid.play();
+              }
+              else{
+                vid.pause();
+              }
+            }
+          });
+
+          audio.addEventListener('ended', function(e){
+            if(i<fileVals.length-1){
+              i++;
+              fileName = fileVals[i].name;
+              var source = document.getElementById('audioFileChosen');
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+              audio.pause();
+              audio.load();
+              audio.play();
             }
             else{
-              vid.pause();
+              if (document.getElementById('repeat').checked) {
+                i=0;
+                fileName = fileVals[i].name;
+                var source = document.getElementById('audioFileChosen');
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                audio.pause();
+                audio.load();
+                audio.play();
+              }
+              else{
+                audio.pause();
+              }
             }
-          }
-        });
+          });
 
-        </script>
-      </div>
-    </body>
-    </html>
+          video.addEventListener('ended', function(e){
+            if(i<fileVals.length-1){
+              i++;
+              fileName = fileVals[i].name;
+              var source = document.getElementById('videoFileChosen');
+              source.src = path + fileName;
+              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+              video.pause();
+              video.load();
+              video.play();
+            }
+            else{
+              if (document.getElementById('repeat').checked) {
+                i=0;
+                fileName = fileVals[i].name;
+                var source = document.getElementById('videoFileChosen');
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                video.pause();
+                video.load();
+                video.play();
+              }
+              else{
+                video.pause();
+              }
+            }
+          });
+
+          </script>
+          <h3 id="errorMessage"><span id="error">Please specify folder path by clicking on FolderPath button.</span></h3>
+        </div>
+      </body>
+      </html>
