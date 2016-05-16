@@ -405,15 +405,31 @@ This code is written by Deepak Kumar -->
 
           $(window).keypress(function(e) {
             var vid = document.getElementById("video");
+            var aud = document.getElementById("audio");
             if (e.which == 32) {
-              if (vid.paused == true){
-                vid.play();
+              var flag = isHidden(aud);
+              if(flag==true){
+                if (vid.paused == true){
+                  vid.play();
+                }
+                else{
+                  vid.pause();
+                }
               }
               else{
-                vid.pause();
+                if (aud.paused == true){
+                  aud.play();
+                }
+                else{
+                  aud.pause();
+                }
               }
             }
           });
+
+          function isHidden(el) {
+            return (el.offsetParent === null)
+          }
 
           audio.addEventListener('ended', function(e){
             if(i<fileVals.length-1){
