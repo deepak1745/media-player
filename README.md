@@ -1,3 +1,5 @@
 # media-player
 This application plays downloaded local audio and video files in browser html webpage with full controls. Just choose a local file and start listening to your favourite music files. This is useful in case you are reading a book on any site or doing some googling and don't want to get distracted or waste your precious time due to shift of windows tabs in order to play next media file from file explorer or to change volume levels. If extensions are blocked in your organization or you don't have a working internet connection or youtube is blocked or in worst case your RAM space is small but you have a bunch of downloaded media files then this application will prove to be useful. This player has simple interface and is quite easy to use and support both audio and video files. Just specify the folder path and start listening. The best part of this player is that it is a web application so you can style it to your own personal liking, add or delete as many features as you want and you can also pin this to browser. Being a thread it's light weighted also.
 
+###License
+This project is licensed under the terms of the Apache-2.0 license
