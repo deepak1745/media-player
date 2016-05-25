@@ -104,7 +104,7 @@ This code is written by Deepak Kumar -->
     background-image: url("../images/media4.jpg");
   }
   #youplay{
-    margin-left: 20%;
+    margin-left: 13%;
     margin-right: .5%;
     background-color: #d9534f;
   }
@@ -130,6 +130,33 @@ This code is written by Deepak Kumar -->
     border: 2px solid rgb(107, 58, 59)!important;
     padding: 5px 7px;
   }
+  .list{
+    background-color: #13686B;
+  }
+  .list:hover{
+    background-color: #13686B;
+  }
+  #create{
+    background-color: orange;
+    border-color: orange;
+    margin-right: .5%;
+  }
+  #folderPath{
+    margin-right: .5%;
+  }
+  .dropdown-menu li a:hover{
+    background-color: maroon;
+    color: #fff;
+  }
+  .caret{
+    padding-left: 1%;
+  }
+  #label{
+    margin-top: 1.1%;
+  }
+  .playlistname{
+    height: 70px;
+  }
   </style>
 
   <!--online script-->
@@ -147,7 +174,22 @@ This code is written by Deepak Kumar -->
     <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span class="mode"> Repeat All</span> <i class="fa fa-refresh" aria-hidden="true"></i>
     <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
     <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay <i class="fa fa-youtube-play" aria-hidden="true"></i></button></a>
-    <a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal"> FolderPath <i class="fa fa-folder-open" aria-hidden="true"></i></a>
+    <a href="#myModal" role="button" class="btn btn-primary" id="folderPath" data-toggle="modal"> FolderPath <i class="fa fa-folder-open" aria-hidden="true"></i></a>
+    <a href="#playlistModal" role="button" id="create" class="btn btn-primary" data-toggle="modal"> Create Playlist <i class="fa fa-plus" aria-hidden="true"></i></a>
+    <!-- Split button -->
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Playlists <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">Arijit Hits</a></li>
+        <li><a href="#">Mika Rocks</a></li>
+        <li><a href="#">Bollywood Romance</a></li>
+        <li><a href="#">English Pops</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Old Classics</a></li>
+      </ul>
+    </div>
     <h2 id="songName" style="text-align:center"> Play Song <i class="fa fa-music" aria-hidden="true"></i> </h2>
     <audio class="center audio" id="audio" controls="controls" autoplay="autoplay">
       <source id="audioFileChosen" type="audio/mpeg">
@@ -160,7 +202,7 @@ This code is written by Deepak Kumar -->
       </div>
       <video class = "center video" id="video" width="680" height="380" draggable="true" controls>
         <source id="videoFileChosen" type="video/mp4">
-          <!--<track src="C://Users/krrish/Downloads/Compressed/The.Originals.S03E16.HDTV.x264-LOL.srt" kind="subtitles" srclang="en" label="English" default="default">-->
+          <!-- <track src="C://Users/krrish/Downloads/Music/test.vtt" kind="subtitles" srclang="en" label="English" default="default"> -->
           Your browser does not support the video tag.
         </video>
 
@@ -184,74 +226,87 @@ This code is written by Deepak Kumar -->
 
                 <div class="modal-footer">
                   <button class="btn btn-default" data-dismiss="modal" type="button">Close</button> <button class="btn btn-primary" id="save" type="button" data-dismiss="modal" onclick="myFolderPath()">Save</button>
-                  <h4></h4>
                 </div><!-- end modal-footer -->
               </div><!-- end modal-content -->
             </div><!-- end modal-dialog -->
           </div><!-- end myModal -->
 
-          <script>
-          var path;
-          var audio = document.getElementById('audio');
-          var video = document.getElementById('video');
+          <div class="modal fade" id="playlistModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  <h3 style="text-align:center;" class="modal-title">Enter name of playlist </h3>
+                </div><!-- end modal-header -->
+                <div class="modal-body playlistname">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label" id="label" for="playlist">Name</label>
+                      <div class="col-lg-10">
+                        <input class="form-control" id="playlist" placeholder="Enter name" type="text" spellcheck="false">
+                      </div><!--end of form group-->
+                    </div><!--end of form-horizontal-->
+                  </div><!-- end modal-body -->
 
-          function myFolderPath() {
-            $('#errorMessage').css("display","none");
-            audio.pause();
-            video.pause();
-            $('#myFile').val("");
-            document.getElementById('submit').disabled = false;
-          }
+                  <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">Close</button> <button class="btn btn-primary" id="save" type="button" data-dismiss="modal" onclick="">Save</button>
+                  </div><!-- end modal-footer -->
+                </div><!-- end modal-content -->
+              </div><!-- end modal-dialog -->
+            </div><!-- end myModal -->
 
-          // Specify folder file path here if not entered in folder path modal window.
-          //path = 'E:///himesh hits/';
+            <script>
+            var path;
+            var audio = document.getElementById('audio');
+            var video = document.getElementById('video');
 
-          function myFunction() {
-            path = $('#folderPath').val() + '/';
-            audio.pause();
-            video.pause();
-            fileVals = document.getElementById("myFile").files;
-            fileName = fileVals[0].name;
-            fileFormat = fileName.substring(fileName.length-3,fileName.length);
-            if(fileFormat=="mp3"){
-              $('.video').css("display","none");
-              $('.audio').css("display","block");
-              var source = document.getElementById('audioFileChosen');
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              audio.load();
-              audio.play();
-              i=0;
+            function myFolderPath() {
+              $('#errorMessage').css("display","none");
+              audio.pause();
+              video.pause();
+              $('#myFile').val("");
+              document.getElementById('submit').disabled = false;
             }
-            else{
-              $('.audio').css("display","none");
-              $('.video').css("display","block");
-              var source = document.getElementById('videoFileChosen');
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              video.load();
-              video.play();
-              i=0;
-            }
-          }
 
-          function nextFunction(){
-            if(fileFormat=="mp3"){
-              $('.video').css("display","none");
-              $('.audio').css("display","block");
-              var source = document.getElementById('audioFileChosen');
-              if(i<fileVals.length-1){
-                i++;
-                fileName = fileVals[i].name;
+            // Specify folder file path here if not entered in folder path modal window.
+            //e.g. path = 'E:///himesh hits/';
+
+            function myFunction() {
+              path = $('#folderPath').val() + '/';
+              audio.pause();
+              video.pause();
+              fileVals = document.getElementById("myFile").files;
+              fileName = fileVals[0].name;
+              fileFormat = fileName.substring(fileName.length-3,fileName.length);
+              if(fileFormat=="mp3"){
+                $('.video').css("display","none");
+                $('.audio').css("display","block");
+                var source = document.getElementById('audioFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                audio.pause();
                 audio.load();
                 audio.play();
+                i=0;
               }
               else{
-                if (document.getElementById('repeat').checked) {
-                  i=0;
+                $('.audio').css("display","none");
+                $('.video').css("display","block");
+                var source = document.getElementById('videoFileChosen');
+                source.src = path + fileName;
+                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                video.load();
+                video.play();
+                i=0;
+              }
+            }
+
+            function nextFunction(){
+              if(fileFormat=="mp3"){
+                $('.video').css("display","none");
+                $('.audio').css("display","block");
+                var source = document.getElementById('audioFileChosen');
+                if(i<fileVals.length-1){
+                  i++;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -260,26 +315,26 @@ This code is written by Deepak Kumar -->
                   audio.play();
                 }
                 else{
-                  audio.pause();
+                  if (document.getElementById('repeat').checked) {
+                    i=0;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    audio.pause();
+                    audio.load();
+                    audio.play();
+                  }
+                  else{
+                    audio.pause();
+                  }
                 }
               }
-            }
-            else{
-              $('.audio').css("display","none");
-              $('.video').css("display","block");
-              var source = document.getElementById('videoFileChosen');
-              if(i<fileVals.length-1){
-                i++;
-                fileName = fileVals[i].name;
-                source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                video.pause();
-                video.load();
-                video.play();
-              }
               else{
-                if (document.getElementById('repeat').checked) {
-                  i=0;
+                $('.audio').css("display","none");
+                $('.video').css("display","block");
+                var source = document.getElementById('videoFileChosen');
+                if(i<fileVals.length-1){
+                  i++;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -288,29 +343,29 @@ This code is written by Deepak Kumar -->
                   video.play();
                 }
                 else{
-                  video.pause();
+                  if (document.getElementById('repeat').checked) {
+                    i=0;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    video.pause();
+                    video.load();
+                    video.play();
+                  }
+                  else{
+                    video.pause();
+                  }
                 }
               }
             }
-          }
 
-          function prevFunction(){
-            if(fileFormat=="mp3"){
-              $('.video').css("display","none");
-              $('.audio').css("display","block");
-              var source = document.getElementById('audioFileChosen');
-              if(i>0){
-                i--;
-                fileName = fileVals[i].name;
-                source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                audio.pause();
-                audio.load();
-                audio.play();
-              }
-              else{
-                if (document.getElementById('repeat').checked) {
-                  i=fileVals.length-1;
+            function prevFunction(){
+              if(fileFormat=="mp3"){
+                $('.video').css("display","none");
+                $('.audio').css("display","block");
+                var source = document.getElementById('audioFileChosen');
+                if(i>0){
+                  i--;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -319,26 +374,26 @@ This code is written by Deepak Kumar -->
                   audio.play();
                 }
                 else{
-                  audio.pause();
+                  if (document.getElementById('repeat').checked) {
+                    i=fileVals.length-1;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    audio.pause();
+                    audio.load();
+                    audio.play();
+                  }
+                  else{
+                    audio.pause();
+                  }
                 }
               }
-            }
-            else{
-              $('.audio').css("display","none");
-              $('.video').css("display","block");
-              var source = document.getElementById('videoFileChosen');
-              if(i>0){
-                i--;
-                fileName = fileVals[i].name;
-                source.src = path + fileName;
-                $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-                video.pause();
-                video.load();
-                video.play();
-              }
               else{
-                if (document.getElementById('repeat').checked) {
-                  i=fileVals.length-1;
+                $('.audio').css("display","none");
+                $('.video').css("display","block");
+                var source = document.getElementById('videoFileChosen');
+                if(i>0){
+                  i--;
                   fileName = fileVals[i].name;
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -347,52 +402,51 @@ This code is written by Deepak Kumar -->
                   video.play();
                 }
                 else{
-                  video.pause();
+                  if (document.getElementById('repeat').checked) {
+                    i=fileVals.length-1;
+                    fileName = fileVals[i].name;
+                    source.src = path + fileName;
+                    $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    video.pause();
+                    video.load();
+                    video.play();
+                  }
+                  else{
+                    video.pause();
+                  }
                 }
               }
             }
-          }
 
-          function currentFunction(){
-            if(fileFormat == 'mp3'){
-              if(audio.loop == false){
-                audio.loop = true;
-                $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
+            function currentFunction(){
+              if(fileFormat == 'mp3'){
+                if(audio.loop == false){
+                  audio.loop = true;
+                  $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
+                }
+                else{
+                  audio.loop = false;
+                  $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
+                }
               }
               else{
-                audio.loop = false;
-                $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
+                if(video.loop == false){
+                  video.loop = true;
+                  $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
+                }
+                else{
+                  video.loop = false;
+                  $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
+                }
               }
             }
-            else{
-              if(video.loop == false){
-                video.loop = true;
-                $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
-              }
-              else{
-                video.loop = false;
-                $('#curr').html('Repeat Current ' + '<i class="fa fa-repeat" aria-hidden="true"></i>');
-              }
-            }
-          }
 
-          document.getElementById("video").onclick = function(ev){
-            var vid = document.getElementById("video");
-            var heightOfControls = 45;
-            var areaAboveControls = vid.height - heightOfControls;
-            if(ev.layerY < areaAboveControls)
-            {
-              if(vid.paused){
-                vid.play();
-              }
-              else{
-                vid.pause();
-              }
-            }
-            else
-            {
-              if( Math.abs(window.innerHeight - screen.height)<150) {
-                // browser is fullscreen
+            document.getElementById("video").onclick = function(ev){
+              var vid = document.getElementById("video");
+              var heightOfControls = 45;
+              var areaAboveControls = vid.height - heightOfControls;
+              if(ev.layerY < areaAboveControls)
+              {
                 if(vid.paused){
                   vid.play();
                 }
@@ -400,51 +454,51 @@ This code is written by Deepak Kumar -->
                   vid.pause();
                 }
               }
-            }
-          };
-
-          $(window).keypress(function(e) {
-            var vid = document.getElementById("video");
-            var aud = document.getElementById("audio");
-            if (e.which == 32) {
-              var flag = isHidden(aud);
-              if(flag==true){
-                if (vid.paused == true){
-                  vid.play();
-                }
-                else{
-                  vid.pause();
+              else
+              {
+                if( Math.abs(window.innerHeight - screen.height)<150) {
+                  // browser is fullscreen
+                  if(vid.paused){
+                    vid.play();
+                  }
+                  else{
+                    vid.pause();
+                  }
                 }
               }
-              else{
-                if (aud.paused == true){
-                  aud.play();
+            };
+
+            $(window).keypress(function(e) {
+              var vid = document.getElementById("video");
+              var aud = document.getElementById("audio");
+              if (e.which == 32) {
+                var flag = isHidden(aud);
+                if(flag==true){
+                  if (vid.paused == true){
+                    vid.play();
+                  }
+                  else{
+                    vid.pause();
+                  }
                 }
                 else{
-                  aud.pause();
+                  if (aud.paused == true){
+                    aud.play();
+                  }
+                  else{
+                    aud.pause();
+                  }
                 }
               }
-            }
-          });
+            });
 
-          function isHidden(el) {
-            return (el.offsetParent === null)
-          }
-
-          audio.addEventListener('ended', function(e){
-            if(i<fileVals.length-1){
-              i++;
-              fileName = fileVals[i].name;
-              var source = document.getElementById('audioFileChosen');
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              audio.pause();
-              audio.load();
-              audio.play();
+            function isHidden(el) {
+              return (el.offsetParent === null)
             }
-            else{
-              if (document.getElementById('repeat').checked) {
-                i=0;
+
+            audio.addEventListener('ended', function(e){
+              if(i<fileVals.length-1){
+                i++;
                 fileName = fileVals[i].name;
                 var source = document.getElementById('audioFileChosen');
                 source.src = path + fileName;
@@ -454,25 +508,25 @@ This code is written by Deepak Kumar -->
                 audio.play();
               }
               else{
-                audio.pause();
+                if (document.getElementById('repeat').checked) {
+                  i=0;
+                  fileName = fileVals[i].name;
+                  var source = document.getElementById('audioFileChosen');
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  audio.pause();
+                  audio.load();
+                  audio.play();
+                }
+                else{
+                  audio.pause();
+                }
               }
-            }
-          });
+            });
 
-          video.addEventListener('ended', function(e){
-            if(i<fileVals.length-1){
-              i++;
-              fileName = fileVals[i].name;
-              var source = document.getElementById('videoFileChosen');
-              source.src = path + fileName;
-              $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
-              video.pause();
-              video.load();
-              video.play();
-            }
-            else{
-              if (document.getElementById('repeat').checked) {
-                i=0;
+            video.addEventListener('ended', function(e){
+              if(i<fileVals.length-1){
+                i++;
                 fileName = fileVals[i].name;
                 var source = document.getElementById('videoFileChosen');
                 source.src = path + fileName;
@@ -482,13 +536,24 @@ This code is written by Deepak Kumar -->
                 video.play();
               }
               else{
-                video.pause();
+                if (document.getElementById('repeat').checked) {
+                  i=0;
+                  fileName = fileVals[i].name;
+                  var source = document.getElementById('videoFileChosen');
+                  source.src = path + fileName;
+                  $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  video.pause();
+                  video.load();
+                  video.play();
+                }
+                else{
+                  video.pause();
+                }
               }
-            }
-          });
+            });
 
-          </script>
-          <h3 id="errorMessage"><span id="error">Please specify folder path by clicking on FolderPath button.</span></h3>
-        </div>
-      </body>
-      </html>
+            </script>
+            <h3 id="errorMessage"><span id="error">Please specify folder path by clicking on FolderPath button.</span></h3>
+          </div>
+        </body>
+        </html>
