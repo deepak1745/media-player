@@ -172,7 +172,7 @@ This code is written by Deepak Kumar -->
     <input type="file" id="myFile" size="70" autofocus multiple="multiple"/>
     <button type="button" class="buttons" id= "submit" disabled="true" onclick="myFunction()">Submit</button>
     <input type="checkbox" id="repeat" name="repeat" value="repeat "> <span class="mode"> Repeat All</span> <i class="fa fa-refresh" aria-hidden="true"></i>
-    <input type="checkbox" id="shuffle" name="shuffle" value="shuffle "> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
+    <input type="checkbox" id="shuffle" name="shuffle" value="shuffle " disabled="disabled"> <span class="mode"> Shuffle </span> <i class="fa fa-random" aria-hidden="true"></i>
     <a href="youtube_media_player.html"><button type="button"  class="btn btn-danger" id="youplay">YouPlay <i class="fa fa-youtube-play" aria-hidden="true"></i></button></a>
     <a href="#myModal" role="button" class="btn btn-primary" id="path" data-toggle="modal"> FolderPath <i class="fa fa-folder-open" aria-hidden="true"></i></a>
     <a href="#playlistModal" role="button" id="create" class="btn btn-primary" data-toggle="modal"> Create Playlist <i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -259,6 +259,7 @@ This code is written by Deepak Kumar -->
             var path;
             var audio = document.getElementById('audio');
             var video = document.getElementById('video');
+            var array = [];
 
             function myFolderPath() {
               $('#errorMessage').css("display","none");
@@ -276,6 +277,7 @@ This code is written by Deepak Kumar -->
               audio.pause();
               video.pause();
               fileVals = document.getElementById("myFile").files;
+              document.getElementById('shuffle').disabled = false;
               fileName = fileVals[0].name;
               fileFormat = fileName.substring(fileName.length-3,fileName.length);
               if(fileFormat=="mp3"){
@@ -307,7 +309,12 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('audioFileChosen');
                 if(i<fileVals.length-1){
                   i++;
-                  fileName = fileVals[i].name;
+                  if ( document.getElementById('shuffle').checked === true ){
+                    fileName = array[i];
+                  }
+                  else{
+                    fileName = fileVals[i].name;
+                  }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   audio.pause();
@@ -335,7 +342,12 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('videoFileChosen');
                 if(i<fileVals.length-1){
                   i++;
-                  fileName = fileVals[i].name;
+                  if ( document.getElementById('shuffle').checked === true ){
+                    fileName = array[i];
+                  }
+                  else{
+                    fileName = fileVals[i].name;
+                  }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   video.pause();
@@ -366,7 +378,12 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('audioFileChosen');
                 if(i>0){
                   i--;
-                  fileName = fileVals[i].name;
+                  if ( document.getElementById('shuffle').checked === true ){
+                    fileName = array[i];
+                  }
+                  else{
+                    fileName = fileVals[i].name;
+                  }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   audio.pause();
@@ -394,7 +411,12 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('videoFileChosen');
                 if(i>0){
                   i--;
-                  fileName = fileVals[i].name;
+                  if ( document.getElementById('shuffle').checked === true ){
+                    fileName = array[i];
+                  }
+                  else{
+                    fileName = fileVals[i].name;
+                  }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
                   video.pause();
@@ -499,7 +521,12 @@ This code is written by Deepak Kumar -->
             audio.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
-                fileName = fileVals[i].name;
+                if ( document.getElementById('shuffle').checked === true ){
+                  fileName = array[i];
+                }
+                else{
+                  fileName = fileVals[i].name;
+                }
                 var source = document.getElementById('audioFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -527,7 +554,12 @@ This code is written by Deepak Kumar -->
             video.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
-                fileName = fileVals[i].name;
+                if ( document.getElementById('shuffle').checked === true ){
+                  fileName = array[i];
+                }
+                else{
+                  fileName = fileVals[i].name;
+                }
                 var source = document.getElementById('videoFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
@@ -554,33 +586,26 @@ This code is written by Deepak Kumar -->
 
             document.getElementById('shuffle').onchange = function() {
               if ( document.getElementById('shuffle').checked === true ) {
-                var array = [];
                 for(var i=0; i< fileVals.length; i++){
                   array[i] = fileVals[i].name;
                 }
-                //console.log(array);
-                shuffle(array);
-                //console.log(array);
+                shuffle(array);  // shuffle the array.
               }
             };
 
             function shuffle(array) {
               //console.log(array);
               var currentIndex = array.length, temporaryValue, randomIndex;
-
               // While there remain elements to shuffle...
               while (0 !== currentIndex) {
-
                 // Pick a remaining element...
                 randomIndex = Math.floor(Math.random() * currentIndex);
                 currentIndex -= 1;
-
                 // And swap it with the current element.
                 temporaryValue = array[currentIndex];
                 array[currentIndex] = array[randomIndex];
                 array[randomIndex] = temporaryValue;
               }
-
               return array;
             }
 
