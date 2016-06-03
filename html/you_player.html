@@ -1,0 +1,95 @@
+<!-- Copyright 2016 Deepak Kumar
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+This code is written by Deepak Kumar -->
+
+<!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01//EN"  "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-US">
+<head profile="http://www.w3.org/2005/10/profile">
+  <link rel="icon" type="image/png"  href="../favicon/music_player.ico">
+  <meta charset="utf-8">
+  <title>YouTube Media Player</title>
+  <style media="screen">
+  #mainPlayer{
+    width: 690px;
+    margin: auto;
+    display: block;
+    margin-top: 4%;
+  }
+  button{
+    color:#fff!important;
+    height: 30px;
+    background-color: #3e8e41;
+    border: none;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  body{
+    background-image: url("../images/media4.jpg");
+  }
+  #playVideo{
+    border: 1px solid #181818
+  }
+  #home{
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+  }
+  #home-button{
+    background-color: #337ab7;
+  }
+  #input{
+    margin-left: 3%;
+    margin-right: 1%;
+    height: 25px;
+    width: 31%;
+    font-size: 18px;
+    padding: 3px 10px;
+    font-weight: 500;
+  }
+  </style>
+
+  <!--online script-->
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+
+  <!--downloaded script-->
+  <script src="../js/jquery-1.12.3.min.js"></script>
+</head>
+<body>
+  <div id="home"><a href="media_player.html"><button type="button" id="home-button">Home</button></a>
+    <input id= "input" type="text" name="source" autofocus required placeholder="Paste youtube embedded url here" spellcheck="false"/>
+    <button type="button" onclick="myFunction()">Submit</button>
+  </div>
+  <div id ="mainPlayer">
+    <iframe id="playVideo" src="http://www.youtube.com/embed/lBuLUidR9r0" width="670" height="450"  frameborder="2" allowfullscreen title="YouTube video player" class="youtube-player" type="text/html" autohide="1" autoplay="1" controls loop></iframe>
+  </div>
+  <script>
+  $('input').bind("enterKey",function(e){
+    var url = $('#input').val();
+    var frame = document.getElementById('playVideo');
+    frame.src = url;
+  });
+  $('input').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+      $(this).trigger("enterKey");
+    }
+  });
+  function myFunction() {
+    var url = $('#input').val();
+    var frame = document.getElementById('playVideo');
+    frame.src = url;
+  }
+  </script>
+</body>
+</html>

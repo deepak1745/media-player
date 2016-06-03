@@ -220,7 +220,7 @@ This code is written by Deepak Kumar -->
                   <div class="form-group">
                     <label class="col-lg-2 control-label" for="folderPath">Path</label>
                     <div class="col-lg-10">
-                      <input class="form-control" id="folderPath" placeholder="Enter path here" type="text" spellcheck="false" autofocus>
+                      <input class="form-control" id="folderPath" placeholder="Enter path here" type="text" spellcheck="false" autofocus autocomplete="on">
                     </div><!--end of form group-->
                   </div><!--end of form-horizontal-->
                 </div><!-- end modal-body -->
@@ -287,6 +287,7 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('audioFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                document.title = fileName;
                 audio.load();
                 audio.play();
                 i=0;
@@ -297,6 +298,7 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('videoFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                document.title = fileName;
                 video.load();
                 video.play();
                 i=0;
@@ -318,6 +320,7 @@ This code is written by Deepak Kumar -->
                   }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   audio.pause();
                   audio.load();
                   audio.play();
@@ -328,6 +331,7 @@ This code is written by Deepak Kumar -->
                     fileName = fileVals[i].name;
                     source.src = path + fileName;
                     $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    document.title = fileName;
                     audio.pause();
                     audio.load();
                     audio.play();
@@ -351,6 +355,7 @@ This code is written by Deepak Kumar -->
                   }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   video.pause();
                   video.load();
                   video.play();
@@ -361,6 +366,7 @@ This code is written by Deepak Kumar -->
                     fileName = fileVals[i].name;
                     source.src = path + fileName;
                     $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    document.title = fileName;
                     video.pause();
                     video.load();
                     video.play();
@@ -387,6 +393,7 @@ This code is written by Deepak Kumar -->
                   }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   audio.pause();
                   audio.load();
                   audio.play();
@@ -397,6 +404,7 @@ This code is written by Deepak Kumar -->
                     fileName = fileVals[i].name;
                     source.src = path + fileName;
                     $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    document.title = fileName;
                     audio.pause();
                     audio.load();
                     audio.play();
@@ -420,6 +428,7 @@ This code is written by Deepak Kumar -->
                   }
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   video.pause();
                   video.load();
                   video.play();
@@ -430,6 +439,7 @@ This code is written by Deepak Kumar -->
                     fileName = fileVals[i].name;
                     source.src = path + fileName;
                     $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                    document.title = fileName;
                     video.pause();
                     video.load();
                     video.play();
@@ -531,6 +541,7 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('audioFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                document.title = fileName;
                 audio.pause();
                 audio.load();
                 audio.play();
@@ -542,6 +553,7 @@ This code is written by Deepak Kumar -->
                   var source = document.getElementById('audioFileChosen');
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   audio.pause();
                   audio.load();
                   audio.play();
@@ -564,6 +576,7 @@ This code is written by Deepak Kumar -->
                 var source = document.getElementById('videoFileChosen');
                 source.src = path + fileName;
                 $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                document.title = fileName;
                 video.pause();
                 video.load();
                 video.play();
@@ -575,6 +588,7 @@ This code is written by Deepak Kumar -->
                   var source = document.getElementById('videoFileChosen');
                   source.src = path + fileName;
                   $('#songName').html('Playing '+ fileName + ' Song ' + '<i class="fa fa-music" aria-hidden="true"></i>');
+                  document.title = fileName;
                   video.pause();
                   video.load();
                   video.play();
