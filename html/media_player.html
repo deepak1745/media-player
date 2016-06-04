@@ -281,7 +281,7 @@ This code is written by Deepak Kumar -->
               document.getElementById('shuffle').disabled = false;
               fileName = fileVals[0].name;
               fileFormat = fileName.substring(fileName.length-3,fileName.length);
-              if(fileFormat=="mp3"){
+              if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
                 var source = document.getElementById('audioFileChosen');
@@ -306,7 +306,7 @@ This code is written by Deepak Kumar -->
             }
 
             function nextFunction(){
-              if(fileFormat=="mp3"){
+              if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
                 var source = document.getElementById('audioFileChosen');
@@ -379,7 +379,7 @@ This code is written by Deepak Kumar -->
             }
 
             function prevFunction(){
-              if(fileFormat=="mp3"){
+              if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
                 var source = document.getElementById('audioFileChosen');
@@ -452,7 +452,7 @@ This code is written by Deepak Kumar -->
             }
 
             function currentFunction(){
-              if(fileFormat == 'mp3'){
+              if(fileFormat == 'mp3' || fileFormat=="MP3"){
                 if(audio.loop == false){
                   audio.loop = true;
                   $('#curr').html('Stop Repeat ' + '<i class="fa fa-stop" aria-hidden="true"></i>');
