@@ -306,6 +306,15 @@ This code is written by Deepak Kumar -->
             }
 
             function nextFunction(){
+              if (document.getElementById('repeat').checked) {
+                fileName = fileVals[0].name;
+              }
+              else{
+                fileName = fileVals[i+1].name;
+                fileFormat = fileName.substring(fileName.length-3,fileName.length);
+                console.log(fileFormat);
+              }
+
               if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
@@ -379,6 +388,14 @@ This code is written by Deepak Kumar -->
             }
 
             function prevFunction(){
+              if (document.getElementById('repeat').checked) {
+                fileName = fileVals[0].name;
+              }
+              else{
+                fileName = fileVals[i-1].name;
+                fileFormat = fileName.substring(fileName.length-3,fileName.length);
+                console.log(fileFormat);
+              }
               if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
