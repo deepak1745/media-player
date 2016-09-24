@@ -261,7 +261,6 @@ This code is written by Deepak Kumar -->
             var audio = document.getElementById('audio');
             var video = document.getElementById('video');
             var array = [];
-
             function myFolderPath() {
               $('#errorMessage').css("display","none");
               audio.pause();
@@ -269,10 +268,8 @@ This code is written by Deepak Kumar -->
               $('#myFile').val("");
               document.getElementById('submit').disabled = false;
             }
-
             // Specify folder file path here if not entered in folder path modal window.
             //e.g. path = 'E:///himesh hits/';
-
             function myFunction() {
               path = $('#folderPath').val() + '/';
               audio.pause();
@@ -304,17 +301,7 @@ This code is written by Deepak Kumar -->
                 i=0;
               }
             }
-
             function nextFunction(){
-              if (document.getElementById('repeat').checked) {
-                fileName = fileVals[0].name;
-              }
-              else{
-                fileName = fileVals[i+1].name;
-                fileFormat = fileName.substring(fileName.length-3,fileName.length);
-                console.log(fileFormat);
-              }
-
               if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
@@ -386,16 +373,7 @@ This code is written by Deepak Kumar -->
                 }
               }
             }
-
             function prevFunction(){
-              if (document.getElementById('repeat').checked) {
-                fileName = fileVals[0].name;
-              }
-              else{
-                fileName = fileVals[i-1].name;
-                fileFormat = fileName.substring(fileName.length-3,fileName.length);
-                console.log(fileFormat);
-              }
               if(fileFormat=="mp3" || fileFormat=="MP3"){
                 $('.video').css("display","none");
                 $('.audio').css("display","block");
@@ -467,7 +445,6 @@ This code is written by Deepak Kumar -->
                 }
               }
             }
-
             function currentFunction(){
               if(fileFormat == 'mp3' || fileFormat=="MP3"){
                 if(audio.loop == false){
@@ -490,7 +467,6 @@ This code is written by Deepak Kumar -->
                 }
               }
             }
-
             document.getElementById("video").onclick = function(ev){
               var vid = document.getElementById("video");
               var heightOfControls = 45;
@@ -517,7 +493,6 @@ This code is written by Deepak Kumar -->
                 }
               }
             };
-
             $(window).keypress(function(e) {
               var vid = document.getElementById("video");
               var aud = document.getElementById("audio");
@@ -541,11 +516,9 @@ This code is written by Deepak Kumar -->
                 }
               }
             });
-
             function isHidden(el) {
               return (el.offsetParent === null)
             }
-
             audio.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
@@ -580,7 +553,6 @@ This code is written by Deepak Kumar -->
                 }
               }
             });
-
             video.addEventListener('ended', function(e){
               if(i<fileVals.length-1){
                 i++;
@@ -615,7 +587,6 @@ This code is written by Deepak Kumar -->
                 }
               }
             });
-
             document.getElementById('shuffle').onchange = function() {
               if ( document.getElementById('shuffle').checked === true ) {
                 for(var i=0; i< fileVals.length; i++){
@@ -624,7 +595,6 @@ This code is written by Deepak Kumar -->
                 shuffle(array);  // shuffle the array.
               }
             };
-
             function shuffle(array) {
               //console.log(array);
               var currentIndex = array.length, temporaryValue, randomIndex;
@@ -640,7 +610,6 @@ This code is written by Deepak Kumar -->
               }
               return array;
             }
-
             </script>
             <h3 id="errorMessage"><span id="error">Please specify folder path by clicking on FolderPath button.</span></h3>
           </div>
